@@ -6,7 +6,7 @@ var crypt = require('../models/bcrypt.js');
 
 // Validate traveller login user details
 router.route('/traveller/login').post(function (req, res) {
-  console.log("Inside traveller Login Post");
+
   var email = req.body.email;
   var lowercaseemail = email.toLowerCase();
   var trimemail = lowercaseemail.trim();
@@ -15,7 +15,6 @@ router.route('/traveller/login').post(function (req, res) {
   pool.query('SELECT * FROM users WHERE email = ?', [trimemail], (err, rows) => {
     
     if (err) {
-      console.log("User does not exist");
       res.status(400).json({responseMessage: 'User does not exist'});
     } else {
       if (rows.length > 0) {
